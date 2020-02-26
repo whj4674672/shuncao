@@ -39,6 +39,7 @@ private:
     quint16 numberOfEntries = 55;//一次读取的长度
     quint16 ctrl_address = 30; //实际地址4031
     quint16 cmd_data;//控制位的数据
+    quint16 lajia_data;
 
 private slots:
     void onStateChanged(int state);
@@ -89,6 +90,18 @@ private slots:
 
     void on_Btn_auto_clicked();
 
+    void on_Btn_remote_clicked();
+
+    void on_Btn_jiyi_pressed();
+
+    void on_Btn_jiyi_released();
+
+    void on_Btn_sanjiao_clicked();
+
+    void on_Btn_lajia_pressed();
+
+    void on_Btn_lajia_released();
+
 private:
     Ui::MainWindow *ui;
     SettingsDialog *m_settingsDialog;
@@ -99,6 +112,8 @@ private:
     WriteRegisterModel *writeModel;
     bool connect_flag = false;//连接状态标志位，初始化设置为fasle
     bool auto_flag;
+    bool remote_flag = false;
+    bool sanjiao_flag = false;
 };
 
 

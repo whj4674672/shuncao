@@ -30,9 +30,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>40</y>
       <width>319</width>
-      <height>177</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -58,24 +58,10 @@ border:1px solid rgb(0,0,0)
        <x>10</x>
        <y>10</y>
        <width>294</width>
-       <height>151</height>
+       <height>180</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>给定速度</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Lcd_setspeed"/>
-        </item>
-       </layout>
-      </item>
       <item row="3" column="2">
        <layout class="QHBoxLayout" name="horizontalLayout_7">
         <item>
@@ -90,20 +76,6 @@ border:1px solid rgb(0,0,0)
         </item>
        </layout>
       </item>
-      <item row="1" column="2">
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>右截电流</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Lcd_righelec"/>
-        </item>
-       </layout>
-      </item>
       <item row="1" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
@@ -115,6 +87,20 @@ border:1px solid rgb(0,0,0)
         </item>
         <item>
          <widget class="QLCDNumber" name="Lcd_leftelec"/>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>左截温度</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Lcd_lefttemp"/>
         </item>
        </layout>
       </item>
@@ -174,6 +160,47 @@ border:1px solid rgb(0,0,0)
         </item>
        </layout>
       </item>
+      <item row="0" column="1">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>右截电流</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Lcd_righelec"/>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>给定速度</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Lcd_setspeed"/>
+        </item>
+       </layout>
+      </item>
       <item row="4" column="2">
        <layout class="QHBoxLayout" name="horizontalLayout_13">
         <item>
@@ -188,32 +215,19 @@ border:1px solid rgb(0,0,0)
         </item>
        </layout>
       </item>
-      <item row="3" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>左截温度</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Lcd_lefttemp"/>
-        </item>
-       </layout>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="Btn_remote">
+        <property name="text">
+         <string>远控</string>
+        </property>
+       </widget>
       </item>
-      <item row="0" column="1">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+      <item row="5" column="2">
+       <widget class="QPushButton" name="Btn_jiyi">
+        <property name="text">
+         <string>开启记忆截割</string>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -222,7 +236,7 @@ border:1px solid rgb(0,0,0)
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>250</y>
+      <y>260</y>
       <width>319</width>
       <height>141</height>
      </rect>
@@ -366,9 +380,9 @@ border:1px solid rgb(0,0,0)
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>50</y>
+      <y>40</y>
       <width>181</width>
-      <height>341</height>
+      <height>361</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -388,7 +402,7 @@ border:1px solid rgb(0,0,0)
        <x>10</x>
        <y>10</y>
        <width>158</width>
-       <height>141</height>
+       <height>170</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
@@ -399,38 +413,10 @@ border:1px solid rgb(0,0,0)
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="Btn_Qstart">
-        <property name="text">
-         <string>牵启</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="Btn_Leftdown">
         <property name="text">
          <string>左降</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="Btn_Allstop">
-        <property name="text">
-         <string>总停</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="Btn_Righup">
-        <property name="text">
-         <string>右升</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="Btn_Righdown">
-        <property name="text">
-         <string>右降</string>
         </property>
        </widget>
       </item>
@@ -462,13 +448,55 @@ border:1px solid rgb(0,0,0)
         </property>
        </widget>
       </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="Btn_Righup">
+        <property name="text">
+         <string>右升</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="Btn_Righdown">
+        <property name="text">
+         <string>右降</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="Btn_Qstart">
+        <property name="text">
+         <string>牵启</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="Btn_Allstop">
+        <property name="text">
+         <string>总停</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="Btn_sanjiao">
+        <property name="text">
+         <string>三角煤使能</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QPushButton" name="Btn_lajia">
+        <property name="text">
+         <string>拉架完成</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>170</y>
+       <y>190</y>
        <width>160</width>
        <height>157</height>
       </rect>
@@ -624,7 +652,14 @@ border:1px solid rgb(0,0,0)
     <addaction name="actionDisconnect"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>帮助中心</string>
+    </property>
+    <addaction name="action1"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -651,6 +686,11 @@ border:1px solid rgb(0,0,0)
   <action name="actionExit">
    <property name="text">
     <string>关闭程序</string>
+   </property>
+  </action>
+  <action name="action1">
+   <property name="text">
+    <string>帮助</string>
    </property>
   </action>
  </widget>

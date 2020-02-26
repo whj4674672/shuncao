@@ -105,7 +105,8 @@ void MainWindow::readReady()
         const QModbusDataUnit unit = reply->result();
 
         cmd_data = unit.value(ctrl_address);
-//qDebug()<<"cmd_data:"<<cmd_data;
+        lajia_data = unit.value(49);//4050的状态位
+
         ui->Lcd_setspeed->display(static_cast<int>(unit.value(0)));//采煤机给定速度
         ui->Lcd_leftqelec->display(static_cast<int>(unit.value(1)));//左牵引电流
         ui->Lcd_righqelec->display(static_cast<int>(unit.value(2)));//右牵引电流
@@ -235,7 +236,7 @@ void MainWindow::on_connectButton_clicked()
                 statusBar()->showMessage(tr("连接成功 ") , 5000);
 
                 //连接成功之后立即把远程使能位打开
-                open_cmd();
+                //open_cmd();
             }
     }
     else {  //如果连接状态是已经连接
@@ -308,12 +309,12 @@ void MainWindow::write_cmd(quint16 cmd_address, quint16 lengh, quint16* data)
 
     quint16 wdata[127] = {0};
     memcpy(wdata,data,2*lengh);
-qDebug()<<"wdata:"<<wdata[0]<<"lengh:"<<lengh;
+//qDebug()<<"wdata:"<<wdata[0]<<"lengh:"<<lengh;
    //把要写入的数据放入到writeUnit
     for (int i = 0; i< lengh ; i++) {
       writeUnit.setValue(i,wdata[i]);//*(data)
     }
-qDebug()<<"writeUnit:"<<writeUnit.value(0);
+//qDebug()<<"writeUnit:"<<writeUnit.value(0);
     if (auto *reply = modbusDevice->sendWriteRequest(writeUnit, 1))
     {
         //正常完成返回true 取反之后就是false
@@ -444,14 +445,14 @@ void MainWindow::on_Btn_Allstop_released()
 void MainWindow::on_Btn_Qstart_pressed()
 {
     quint16 cmd = cmd_data | (1<<8);
-qDebug()<<"qstart press:"<< cmd;
+//qDebug()<<"qstart press:"<< cmd;
     write_cmd(30,1,&cmd);
 }
 
 void MainWindow::on_Btn_Qstart_released()
 {
     quint16 cmd = cmd_data & ~(1<<8);
-qDebug()<<"qstart released："<< cmd;
+//qDebug()<<"qstart released："<< cmd;
     write_cmd(30,1,&cmd);
 }
 
@@ -509,7 +510,7 @@ void MainWindow::on_Btn_set_pressed()
 
     quint16 host_data[7] = {0};
     host_data[0] = static_cast<quint16>(ui->Box_Setspeed->value()); //32
-    //33 模式变化 暂时没有这个功能
+    host_data[1] = lajia_data;//33
     host_data[2]= static_cast<quint16>(ui->Box_Setnum->value());   //34
     host_data[3]   = static_cast<quint16>(ui->Box_Setgas->value());   //35
     //36 三机运行情况
@@ -552,4 +553,101 @@ void MainWindow::on_Btn_auto_clicked()
         auto_time->stop();
         ui->Btn_auto->setText(tr("自动"));
     }
+}
+
+void MainWindow::on_Btn_remote_clicked()
+{
+    if (!modbusDevice)
+    {
+        return;
+    }
+
+    if(remote_flag == false){
+        remote_flag = true;
+
+        quint16 cmd = 0x80;
+
+        write_cmd(49,1,&cmd);
+
+        ui->Btn_remote->setText(tr("近控"));
+    }
+    else{
+        remote_flag = false;
+
+        quint16 cmd = 0x00;
+        write_cmd(49,1,&cmd);
+        ui->Btn_remote->setText(tr("远控"));
+    }
+
+}
+
+void MainWindow::on_Btn_jiyi_pressed()
+{
+    if (!modbusDevice)
+    {
+        return;
+    }
+
+    quint16 cmd = 0x08;
+
+    write_cmd(32,1,&cmd);
+}
+
+void MainWindow::on_Btn_jiyi_released()
+{
+    if (!modbusDevice)
+    {
+        return;
+    }
+
+    quint16 cmd = 0x00;
+
+    write_cmd(32,1,&cmd);
+}
+
+void MainWindow::on_Btn_sanjiao_clicked()
+{
+    if (!modbusDevice)
+    {
+        return;
+    }
+
+    if(sanjiao_flag == false){
+        sanjiao_flag = true;
+
+        quint16 cmd = 0x01;
+
+        write_cmd(50,1,&cmd);
+
+        ui->Btn_sanjiao->setText(tr("三角煤失能"));
+    }
+    else{
+        sanjiao_flag = false;
+
+        quint16 cmd = 0x00;
+        write_cmd(50,1,&cmd);
+        ui->Btn_sanjiao->setText(tr("三角煤使能"));
+    }
+}
+
+void MainWindow::on_Btn_lajia_pressed()
+{
+    if (!modbusDevice)
+    {
+        return;
+    }
+
+    quint16 cmd = lajia_data | 3;
+    write_cmd(49,1,&cmd);
+}
+
+void MainWindow::on_Btn_lajia_released()
+{
+    if (!modbusDevice)
+    {
+        return;
+    }
+
+    quint16 cmd = lajia_data & ~(3) ;
+    write_cmd(49,1,&cmd);
 }
