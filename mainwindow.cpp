@@ -1,3 +1,4 @@
+﻿#pragma execution_character_set("utf-8")
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settingsdialog.h"
@@ -19,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     modbusDevice = new QModbusRtuSerialMaster(this);//设置modbus主站
 
     initActions();//初始化菜单栏
-    statusBar()->showMessage("请先连接串口！");
+    statusBar()->showMessage("请先连接串口");
 
     if (modbusDevice)
     {
@@ -180,12 +181,12 @@ void MainWindow::onStateChanged(int state)
     //如果state是未连接 则按钮显示 打开串口
     if (state == QModbusDevice::UnconnectedState){
         read_time->stop();
-        ui->connectButton->setText(tr("打开串口"));
+        ui->connectButton->setText("打开串口");
         }
     //如果state是连接 则按钮显示 未连接
     else if (state == QModbusDevice::ConnectedState){
         read_time->start();
-        ui->connectButton->setText(tr("关闭串口"));
+        ui->connectButton->setText("关闭串口");
         }
 }
 
@@ -233,7 +234,7 @@ void MainWindow::on_connectButton_clicked()
                 //read_time->start();
                 ui->actionConnect->setEnabled(false);//连接按钮设置为不可选中
                 ui->actionDisconnect->setEnabled(true);//断开按钮设置可选中
-                statusBar()->showMessage(tr("连接成功 ") , 5000);
+                statusBar()->showMessage("连接成功" , 5000);
 
                 //连接成功之后立即把远程使能位打开
                 //open_cmd();
@@ -505,7 +506,7 @@ void MainWindow::on_Btn_set_pressed()
     {
         auto_flag = false;
         auto_time->stop();
-        ui->Btn_auto->setText(tr("自动"));
+        ui->Btn_auto->setText("自动");
     }
 
     quint16 host_data[7] = {0};
@@ -546,12 +547,12 @@ void MainWindow::on_Btn_auto_clicked()
     if(auto_flag == false){
         auto_flag = true;
         auto_time->start();
-        ui->Btn_auto->setText(tr("停止"));
+        ui->Btn_auto->setText("停止");
     }
     else{
         auto_flag = false;
         auto_time->stop();
-        ui->Btn_auto->setText(tr("自动"));
+        ui->Btn_auto->setText("自动");
     }
 }
 
@@ -569,14 +570,14 @@ void MainWindow::on_Btn_remote_clicked()
 
         write_cmd(49,1,&cmd);
 
-        ui->Btn_remote->setText(tr("近控"));
+        ui->Btn_remote->setText("近控");
     }
     else{
         remote_flag = false;
 
         quint16 cmd = 0x00;
         write_cmd(49,1,&cmd);
-        ui->Btn_remote->setText(tr("远控"));
+        ui->Btn_remote->setText("远控");
     }
 
 }
@@ -619,14 +620,14 @@ void MainWindow::on_Btn_sanjiao_clicked()
 
         write_cmd(50,1,&cmd);
 
-        ui->Btn_sanjiao->setText(tr("三角煤失能"));
+        ui->Btn_sanjiao->setText("三角煤失能");
     }
     else{
         sanjiao_flag = false;
 
         quint16 cmd = 0x00;
         write_cmd(50,1,&cmd);
-        ui->Btn_sanjiao->setText(tr("三角煤使能"));
+        ui->Btn_sanjiao->setText("三角煤使能");
     }
 }
 
