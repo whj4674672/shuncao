@@ -5,6 +5,16 @@
 #include <QDialog>
 #include <QSerialPort>
 
+struct Set_uart {
+    QString com;
+    int parity          = QSerialPort::EvenParity;
+    int baud            = QSerialPort::Baud9600;
+    int dataBits        = QSerialPort::Data8;
+    int stopBits        = QSerialPort::OneStop;
+    int responseTime    = 50;
+    int numberOfRetries = 1;
+};
+
 namespace Ui {
 class SettingsDialog;
 }
@@ -18,7 +28,7 @@ public:
     ~SettingsDialog();
 
     struct Settings {
-        int parity   = QSerialPort::NoParity;
+        int parity   = QSerialPort::EvenParity;
         int baud     = QSerialPort::Baud9600;
         int dataBits = QSerialPort::Data8;
         int stopBits = QSerialPort::OneStop;

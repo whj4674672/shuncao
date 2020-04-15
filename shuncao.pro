@@ -31,6 +31,7 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
+        mythread.h \
         settingsdialog.h
 
 FORMS += \
