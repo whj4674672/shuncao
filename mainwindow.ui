@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>电液控上位机模拟器V0.1</string>
+   <string>电液控上位机模拟器V0.3</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_26">

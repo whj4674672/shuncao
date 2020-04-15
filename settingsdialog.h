@@ -1,4 +1,4 @@
-#ifndef SETTINGSDIALOG_H
+﻿#ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
 
 #include <QtSerialBus/qtserialbusglobal.h>
@@ -18,12 +18,12 @@ public:
     ~SettingsDialog();
 
     struct Settings {
-        int parity = QSerialPort::NoParity;
-        int baud = QSerialPort::Baud9600;
+        int parity   = QSerialPort::NoParity;
+        int baud     = QSerialPort::Baud9600;
         int dataBits = QSerialPort::Data8;
         int stopBits = QSerialPort::OneStop;
-        int responseTime = 1000;
-        int numberOfRetries = 3;
+        int responseTime = 500;
+        int numberOfRetries = 1;
     };
 
     Settings settings() const;

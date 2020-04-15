@@ -82,8 +82,10 @@ void MainWindow::Read_data()
     {
         //如果请求完成，那么返回ture 取反之后就是false
         if (!reply->isFinished())
+            {
             //连接modbus的结束信号，连接到主界面的读准备信号
             connect(reply, &QModbusReply::finished, this, &MainWindow::readReady);
+            }
         else //如果是广播信号删除reply
             delete reply; // broadcast replies return immediately
     } else //如果读取数据失败
@@ -208,14 +210,18 @@ void MainWindow::on_connectButton_clicked()
                 ui->comBox->currentText());//自动识别的方式
 
             //设置连接的 校验位 波特率 数据位 停止位
+//            modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,
+//                m_settingsDialog->settings().parity);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,
-                m_settingsDialog->settings().parity);
+                QSerialPort::EvenParity);  //这里强制设置成偶校验
+            /*这里应该考虑如果没有进行串口配置的情况下是没有办法正确读取到奇偶校验的的值，所以会导致发送的报文不对，下一步这个地方需要进行优化*/
             modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,
                 m_settingsDialog->settings().baud);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,
                 m_settingsDialog->settings().dataBits);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,
                 m_settingsDialog->settings().stopBits);
+
 
             //设置modbus的超时时间
             modbusDevice->setTimeout(m_settingsDialog->settings().responseTime);
@@ -230,7 +236,6 @@ void MainWindow::on_connectButton_clicked()
             }
             else
             {
-                qDebug()<<"连接成功";
                 //read_time->start();
                 ui->actionConnect->setEnabled(false);//连接按钮设置为不可选中
                 ui->actionDisconnect->setEnabled(true);//断开按钮设置可选中

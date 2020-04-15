@@ -3,7 +3,7 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 #include <QComboBox>
-
+#include <QDebug>
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -20,11 +20,12 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
     connect(ui->applyButton, &QPushButton::clicked, [this]()
     {
+        int a;
         //设置校验位
-        m_settings.parity = ui->parityCombo->currentIndex();
+        a = ui->parityCombo->currentIndex();
         //如果校验位大于0 就要加1 因为枚举类型里面没有1
-        if (m_settings.parity > 0)
-            m_settings.parity++;
+        if (a == 0)
+            m_settings.parity = QSerialPort::EvenParity;
         //把combox里面的值转换成int类型之后赋值给baud
         m_settings.baud = ui->baudCombo->currentText().toInt();
         //赋值给数据位
